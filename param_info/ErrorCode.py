@@ -4,6 +4,7 @@ id_intRange = 2 # {0}={1} should be integer in range {2}-{3}
 id_intMin   = 3 # {0}={1} should be integer >= {2}
 id_intMax   = 4 # {0}={1} should be integer <= {2}
 id_int      = 5 # {0}={1} should be integer
+id_valFail  = 6 # {0}={1} should be one of {2}
 
 
 import string
@@ -28,6 +29,7 @@ def addCodes():
     add(id_intMin           ,"{0}={1} should be integer >= {2}")
     add(id_intMax           ,"{0}={1} should be integer <= {2}")
     add(id_int              ,"{0}={1} should be integer")
+    add(id_valFail          ,"{0}={1} should be one of {2}")
     #Messages_End
     pass
 

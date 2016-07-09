@@ -1,8 +1,8 @@
-import unittest
+from .TestCase import TestCase
 from param_info import ParamInfoInt
 from param_info import ErrorCode
 
-class Test_ParamInfoInt(unittest.TestCase):
+class Test_ParamInfoInt(TestCase):
     def test_require(self):
         self.assertParse( ParamInfoInt('size').parse()   , None , ErrorCode.id_require    , 'size is required' )
         self.assertParse( ParamInfoInt('size',5).parse() , 5    , ErrorCode.id_ok         , '')
@@ -24,11 +24,6 @@ class Test_ParamInfoInt(unittest.TestCase):
         self.assertParse( ParamInfoInt('size',min=4,max=6).parse("5") , 5 , ErrorCode.id_ok       , '')
         self.assertParse( ParamInfoInt('size',min=2,max=4).parse("5") , 5 , ErrorCode.id_intRange , 'size=5 should be integer in range 2-4')
         self.assertParse( ParamInfoInt('size',min=6,max=8).parse("5") , 5 , ErrorCode.id_intRange , 'size=5 should be integer in range 6-8')
-
-    def assertParse(self, info, value, code, text):
-        self.assertEqual(info.value     , value)
-        self.assertEqual(info.errorCode , code )
-        self.assertEqual(info.errorText , text )
 
 if __name__ == '__main__':
     unittest.main()
