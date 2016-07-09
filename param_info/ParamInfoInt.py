@@ -31,4 +31,4 @@ class ParamInfoInt(ParamInfo):
         else:
             if kk == None:
                 return self.setError( ErrorCode.id_int , self.name, self.text )
-        return self.setError(0)
+        return self.setError( ErrorCode.id_ok ,self.name )
