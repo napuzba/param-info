@@ -3,19 +3,47 @@
 
 from setuptools import setup
 
-description = 'param_info is python package for parsing parameters'
+description = 'A python package for parsing parameters.'
+
 long_description = '''
 =====
 About
 =====
 
-********
-Features
-********
+A python package for parsing parameters
 
 *****
 Usage
 *****
+
+>>> from param_info import *
+>>> params = ParamList()
+>>> params.add( ParamInfoInt("a1",7,min=5) )
+>>> params.add( ParamInfoVal("a2",['aa','bb','cc']) )
+>>> params.add( ParamInfoStr("a3",' hallo ') )
+>>> def doSomething(param,values):
+...    if params.validate(values):
+...        # Do something with values
+...        for name,param in params.params.items():
+...            print( '{0} ==> {1}'.format(name,param.value))
+...    else:
+...        # Handle errors
+...        for name,param in params.errors.items():
+...            print( 'Error. {0} ==> {1}'.format(name,param.errorText))
+>>> doSomething(params,{'a1':3})
+Error. a1 ==> a1=3 should be integer >= 5
+Error. a2 ==> a2 is required
+>>> doSomething(params,{'a1':8,'a2':'bb'})
+a1 ==> 8
+a2 ==> bb
+a3 ==> hallo
+>>> doSomething(params,{'a2':'zz'})
+Error. a2 ==> a2=zz should be one of ['aa', 'bb', 'cc']
+>>> doSomething(params,{'a2':'aa','a3':'hola'})
+a1 ==> 7
+a2 ==> aa
+a3 ==> hola
+
 '''
 
 setup(
@@ -24,7 +52,7 @@ setup(
   install_requires = [
      'urllib3 >= 1.0',
   ],
-  version          = '2.1.1',
+  version          = '0.1.0',
   author           = 'napuzba',
   author_email     = 'kobi@napuzba.com',
   url              = 'https://github.com/napuzba/param-info.git',
@@ -32,7 +60,7 @@ setup(
   description      = description,
   long_description = long_description,
   license          = 'MIT',
-  keywords         = ['download,crawl,ftp,http'],
+  keywords         = ['validate'],
   classifiers      = [
     'Topic :: Software Development :: Libraries :: Python Modules',
 

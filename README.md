@@ -1,5 +1,5 @@
-# fileloader
+# param-info
 
-param_info is python package for parsing parameters.
+A python package for parsing parameters.
 
 [![Build Status](http://img.shields.io/travis/napuzba/param-info.svg)](https://travis-ci.org/napuzba/param-info)
