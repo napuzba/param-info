@@ -4,16 +4,14 @@ from param_info import ErrorCode
 class ParamInfoVal(ParamInfo):
     def __init__(self,name,values,default = None):
         super().__init__(name,default)
-        self.values = values
+        self._values = values
 
     def parse(self,text=None):
-        self.text = self.value = text
-        if self.value == None:
-            if self.default == None:
-                return self.setError( ErrorCode.id_require ,self.name )
-            else:
-                self.value = self.values[self.default]
-                return self.setError( ErrorCode.id_ok ,self.name )
-        if self.value not in self.values:
-            return self.setError( ErrorCode.id_valFail ,self.name , self.value, self.values)
-        return self.setError( ErrorCode.id_ok ,self.name )
+        if not self.setValue(text):
+            return self
+        if not self._given:
+            self._value = self._values[self._value]
+        if self._value not in self._values:
+            self._value = None
+            return self.setError( ErrorCode.id_valFail ,self._name , self._text, self._values)
+        return self.setError( ErrorCode.id_ok ,self._name )

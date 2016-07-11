@@ -10,7 +10,7 @@ class Test_ParamInfoVal(TestCase):
         self.assertParse( ParamInfoVal('size',['aa','bb','cc'],1).parse()      , "bb"    , ErrorCode.id_ok       , '')
         self.assertParse( ParamInfoVal('size',['aa','bb','cc'],2).parse('aa')  , "aa"    , ErrorCode.id_ok       , '')
     def test_invalid(self):
-        self.assertParse( ParamInfoVal('size',['aa','bb','cc'],2).parse('dd')  , "dd"    , ErrorCode.id_valFail , "size=dd should be one of ['aa', 'bb', 'cc']")
+        self.assertParse( ParamInfoVal('size',['aa','bb','cc'],2).parse('dd')  , None    , ErrorCode.id_valFail , "size=dd should be one of ['aa', 'bb', 'cc']")
 
 if __name__ == '__main__':
     unittest.main()
