@@ -1,5 +1,4 @@
 from .ParamInfo import *
-from winreg import SetValue
 
 class ParamInfoStr(ParamInfo):
     def __init__(self,name,default = None):
