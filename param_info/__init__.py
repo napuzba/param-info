@@ -1,4 +1,4 @@
-from .             import ErrorCode
+from .             import Errors
 from .ParamInfo    import *
 from .ParamInfoInt import *
 from .ParamInfoStr import *

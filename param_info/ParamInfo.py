@@ -1,4 +1,4 @@
-from . import ErrorCode
+from . import Errors
 
 class ParamInfo:
     def __init__(self,name,default = None):
@@ -7,8 +7,7 @@ class ParamInfo:
         self._value     = None
         self._default   = default
         self._given     = False
-        self._errorCode = 0
-        self._errorText = ''
+        self._error     = None
 
     def parse(self,text):
         return self
@@ -16,9 +15,14 @@ class ParamInfo:
     def find(self,values):
         return self.parse(values.get(self._name))
 
-    def setError(self,code,*args):
-        self._errorCode = code
-        self._errorText = ErrorCode.format(self._errorCode,*args)
+    def setError(self,error):
+        self._error     = error
+        self._errorText = self._error.errorText()
+        return self
+
+    def setValid(self):
+        self._error     = None
+        self._errorText = ''
         return self
 
     def setValue(self,value):
@@ -31,7 +35,7 @@ class ParamInfo:
         if self._default != None:
             self._value = self._default
             return True
-        self.setError( ErrorCode.id_require ,self._name )
+        self.setError( Errors.Error_Require(self) )
         return False
 
 
@@ -52,10 +56,10 @@ class ParamInfo:
         return self._given
     @property
     def valid(self):
-        return self._errorCode == ErrorCode.id_ok
+        return self._error == None
     @property
-    def errorCode(self):
-        return self._errorCode
+    def error(self):
+        return self._error
     @property
     def errorText(self):
         return self._errorText

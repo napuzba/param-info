@@ -1,5 +1,3 @@
-from . import ErrorCode
-
 class ParamList:
     def __init__(self):
         self.params = {}
@@ -12,6 +10,7 @@ class ParamList:
         for param in self.params.values():
             param.parse(values.get(param.name))
         for param in self.params.values():
-            if param.errorCode != ErrorCode.id_ok:
+            print('==> ' + param.name + " " + str(param.valid))
+            if param.error:
                 self.errors[param.name] = param
         return len(self.errors) == 0

@@ -1,6 +1,10 @@
 import unittest
 class TestCase(unittest.TestCase):
-    def assertParse(self, info, value, code, text):
-        self.assertEqual(info.value     , value)
-        self.assertEqual(info.errorCode , code )
-        self.assertEqual(info.errorText , text )
+    def assertParse(self, param, value, error, text):
+        self.assertEqual(param.value     , value)
+        self.assertEqual(param.errorText , text )
+        self.assertTrue ( isinstance(param.error,error) )
+    def assertValid(self,param,value):
+        self.assertEqual(param.value     , value)
+        self.assertEqual(param.error     , None )
+        self.assertEqual(param.errorText , ''   )

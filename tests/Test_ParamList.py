@@ -5,14 +5,14 @@ from param_info import ParamInfoVal
 from param_info import ParamInfoInt
 from param_info import ParamInfoStr
 
-from param_info import ErrorCode
+from param_info import Errors
 
 class Test_ParamList(TestCase):
     def test_list_01(self):
         params = self.assertValues({},False)
-        self.assertError(params,'a1', ErrorCode.id_require,'a1 is required')
+        self.assertError(params,'a1', Errors.Error_Require,'a1 is required')
         self.assertValue(params,'a2', 7)
-        self.assertError(params,'a3', ErrorCode.id_require,'a3 is required')
+        self.assertError(params,'a3', Errors.Error_Require,'a3 is required')
         self.assertValue(params,'a4', 'cc')
         self.assertValue(params,'a5', 'aa')
 
@@ -26,10 +26,10 @@ class Test_ParamList(TestCase):
 
     def test_list_03(self):
         params = self.assertValues({'a1':9,'a3':'bb','a4':'abc','a5':'abc'},False)
-        self.assertError(params,'a1', ErrorCode.id_intRange ,'a1=9 should be integer in range 5-7')
+        self.assertError(params,'a1', Errors.Error_IntRange    ,'a1=9 should be integer in range 5-7')
         self.assertValue(params,'a2', 7)
         self.assertValue(params,'a3', 'bb')
-        self.assertError(params,'a4', ErrorCode.id_valFail ,"a4=abc should be one of ['aa', 'bb', 'cc']")
+        self.assertError(params,'a4', Errors.Error_Val         ,"a4=abc should be one of aa,bb,cc")
         self.assertValue(params,'a5', 'abc')
 
     def assertValues(self,values,valid):
@@ -45,11 +45,9 @@ class Test_ParamList(TestCase):
     def assertValue(self,params,name,value):
         self.assertEqual(params.errors.get(name),None)
         self.assertEqual(params.params.get(name).value , value)
-    def assertError(self,params,name,code,text):
-        self.assertEqual(params.errors[name].errorCode,code)
+    def assertError(self,params,name,error,text):
+        self.assertTrue (isinstance(params.errors[name].error , error))
         self.assertEqual(params.errors[name].errorText,text)
-
-
 
 if __name__ == '__main__':
     unittest.main()

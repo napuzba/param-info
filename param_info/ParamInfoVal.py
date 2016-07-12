@@ -1,5 +1,5 @@
 from .ParamInfo import *
-from param_info import ErrorCode
+from param_info import Errors
 
 class ParamInfoVal(ParamInfo):
     def __init__(self,name,values,default = None):
@@ -13,5 +13,5 @@ class ParamInfoVal(ParamInfo):
             self._value = self._values[self._value]
         if self._value not in self._values:
             self._value = None
-            return self.setError( ErrorCode.id_valFail ,self._name , self._text, self._values)
-        return self.setError( ErrorCode.id_ok ,self._name )
+            return self.setError( Errors.Error_Val(self) )
+        return self.setValid()
