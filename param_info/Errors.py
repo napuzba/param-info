@@ -38,3 +38,10 @@ class Error_Val(Error):
     def errorText(self):
         fmt = '{0}={1} should be one of {2}'
         return fmt.format( self.param.name, self.param.text, ','.join(self.param._values))
+
+class Error_Bool(Error):
+    def __init__(self,param):
+        self.param = param
+    def errorText(self):
+        fmt = '{0}={1} should be boolean value : 1,on,true,0,off,false'
+        return fmt.format( self.param.name, self.param.text)
