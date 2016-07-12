@@ -1,6 +1,6 @@
 from . import Errors
 
-class ParamInfo:
+class Param:
     def __init__(self,name,default = None):
         self._name      = name
         self._text      = None

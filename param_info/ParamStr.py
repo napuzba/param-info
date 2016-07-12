@@ -1,7 +1,6 @@
-from .ParamInfo import *
-from winreg import SetValue
+from .Param import *
 
-class ParamInfoStr(ParamInfo):
+class ParamStr(Param):
     def __init__(self,name,default = None):
         super().__init__(name,default)
 

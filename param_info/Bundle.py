@@ -1,4 +1,4 @@
-class ParamList:
+class Bundle:
     def __init__(self):
         self.params = {}
         self.errors = {}

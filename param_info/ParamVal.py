@@ -1,7 +1,7 @@
-from .ParamInfo import *
-from param_info import Errors
+from .Param import *
+from .      import Errors
 
-class ParamInfoVal(ParamInfo):
+class ParamVal(Param):
     def __init__(self,name,values,default = None):
         super().__init__(name,default)
         self._values = values

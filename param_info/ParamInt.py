@@ -1,10 +1,10 @@
 from . import Errors
 from . import helpers
-from .ParamInfo import *
+from .Param import *
 
 
 
-class ParamInfoInt(ParamInfo):
+class ParamInt(Param):
     def __init__(self,name,default = None, min=None,max=None):
         super().__init__(name,default)
         self.min = min
