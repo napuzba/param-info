@@ -50,9 +50,9 @@ setup(
   name             = 'param-info',
   packages         = ['param_info'],
   install_requires = [
-     'urllib3 >= 1.0',
+    
   ],
-  version          = '0.1.0',
+  version          = '0.2.0',
   author           = 'napuzba',
   author_email     = 'kobi@napuzba.com',
   url              = 'https://github.com/napuzba/param-info.git',
