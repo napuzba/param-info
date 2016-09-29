@@ -10,7 +10,6 @@ class Bundle:
         for param in self.params.values():
             param.parse(values.get(param.name))
         for param in self.params.values():
-            print('==> ' + param.name + " " + str(param.valid))
             if param.error:
                 self.errors[param.name] = param
         return len(self.errors) == 0
